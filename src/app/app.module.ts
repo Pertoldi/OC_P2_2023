@@ -21,7 +21,7 @@ import { TitleComponent } from './components/title/title.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgChartsModule 
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
