@@ -8,6 +8,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NgChartsModule  } from 'ng2-charts';
 import { ChartComponent } from './components/chart/chart.component';
 import { TitleComponent } from './components/title/title.component';
+import { CountryComponent } from './core/pages/country/country.component';
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { TitleComponent } from './components/title/title.component';
     AppComponent,
     HomeComponent,
     NotFoundComponent, 
-    ChartComponent, TitleComponent
+    ChartComponent, 
+    TitleComponent,
+    CountryComponent
   ],
   imports: [
     BrowserModule,
