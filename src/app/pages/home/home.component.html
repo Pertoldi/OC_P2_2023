@@ -1,3 +1,12 @@
 <h2>Olympic games app</h2>
 <hr />
 <p>{{ (olympics$ | async)?.length }} data loaded</p>
+
+<app-chart
+  [chartType]="chartType"
+  [chartOptions]="chartOptions"
+  [chartLabels]="chartLabels"
+  [chartDatasets]="chartDatasets"
+  [chartLegend]="chartLegend"
+  [chartPlugins]="chartPlugins"
+ ></app-chart>
