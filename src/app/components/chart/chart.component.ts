@@ -6,10 +6,10 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent {
-  @Input() chartType! : any
-  @Input() chartOptions! : any
-  @Input() chartLabels! : any
-  @Input() chartDatasets! : any
-  @Input() chartLegend! : any
-  @Input() chartPlugins! : any
+  @Input() chartType! : any;
+  @Input() chartOptions! : any;
+  @Input() chartLabels! : any;
+  @Input() chartDatasets! : any;
+  @Input() chartLegend! : any;
+  @Input() chartPlugins! : any;
 }
