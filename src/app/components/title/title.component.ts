@@ -6,5 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./title.component.scss']
 })
 export class TitleComponent {
-  @Input() title = 'default title !'
+  @Input() title = 'default title !';
+  @Input() subTitles: {name: string, value:  number }[] = [];
 }
