@@ -1,0 +1,32 @@
+h1 {
+  font-size: 1.6em;
+  margin: 20px;
+  background: #0b868f;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: white;
+}
+
+.sub-titles { 
+  width: 60vw;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  @media (max-width: 600px) {
+    width: 100vw;
+  }
+  &-element { 
+    padding: 10px 15px;
+    border: solid #0b868f 2px;
+    border-radius: 10px;
+    color: gray;
+    h2 { 
+      margin-bottom: 8px;
+    }
+    p { 
+      color: black;
+      font-weight: bold;
+    }
+  }
+}
+

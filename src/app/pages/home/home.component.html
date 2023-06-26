@@ -1,3 +1,13 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<app-title [title]="'Medals per Country'" [subTitles]="subTitles"></app-title>
+
+<div class="center">
+  <ng-container *ngIf="asyncFlag"> 
+    <app-chart
+    [chartType]="chartType"
+    [chartOptions]="chartOptions"
+    [chartLabels]="chartLabels"
+    [chartDatasets]="chartDatasets"
+    [chartLegend]="chartLegend"
+    ></app-chart>
+  </ng-container>
+</div>
