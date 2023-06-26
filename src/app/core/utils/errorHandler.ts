@@ -8,6 +8,6 @@ export function ensureError(value: any): Error {
   } catch {}
 
   const error = new Error(`This value was thrown as is, not through an Error: ${stringified}`);
-  console.error(error);
+
   return error;
 }

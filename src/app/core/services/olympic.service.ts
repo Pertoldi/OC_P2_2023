@@ -17,8 +17,7 @@ export class OlympicService {
     return this.http.get<any>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
       catchError((error, caught) => {
-        console.log('caught is :', caught)
-        if (error) { 
+        if (error) {
           ensureError(error)
           // TODO use toastWarning
           // can be useful to end loading state and let the user know something went wrong
