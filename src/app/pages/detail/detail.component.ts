@@ -35,6 +35,7 @@ export class DetailComponent implements OnInit, OnDestroy{
       .subscribe((data: IOlympicCountry[] | undefined) => {
         if (data) {
           const filteredData = data.filter(elt => elt.country === this.countryName);
+          console.log('filteredData is :', filteredData);
           const isCountry = filteredData.length > 0;
           if (!isCountry) return this.router.navigate(['/']);
           this.countryData = [{
@@ -43,6 +44,10 @@ export class DetailComponent implements OnInit, OnDestroy{
               return {name: elt.year.toString(), value: elt.medalsCount};
             })
           }];
+          this.subTitles = [
+            { name: 'Number of entires', value: filteredData[0].participations.length },
+            { name: 'Total number medals', value: filteredData[0].participations.map(elt => elt.medalsCount).reduce( (acc, curr) => acc + curr) },
+            { name: 'Total number of athletes', value: filteredData[0].participations.map(elt => elt.athleteCount).reduce( (acc, curr) => acc + curr)  } ];
           this.asyncFlag = true;
         } 
         return 0;
