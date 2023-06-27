@@ -2,12 +2,26 @@
 
 <div class="center">
   <ng-container *ngIf="asyncFlag"> 
-    <app-chart
-    [chartType]="chartType"
-    [chartOptions]="chartOptions"
-    [chartLabels]="chartLabels"
-    [chartDatasets]="chartDatasets"
-    [chartLegend]="chartLegend"
-    ></app-chart>
+    <ngx-charts-pie-chart
+  [view]="view"
+  [results]="data"
+  [gradient]="gradient"
+  [legend]="showLegend"
+  [labels]="showLabels"
+  [doughnut]="isDoughnut"
+  [arcWidth]="0"
+  (select)="onSelect($event)"
+  (window:resize)="onResize($event)"
+  >
+  <ng-template #tooltipTemplate let-model="model">
+    <div class="tooltip">     
+      <p>{{ model.name }}</p>
+      <div class="svg-container">
+        <img src="../../../assets/icon/award.svg" alt="award-icon-alt"/>
+        <p> {{ model.value }}</p>
+      </div>
+    </div>
+  </ng-template>
+</ngx-charts-pie-chart>
   </ng-container>
 </div>

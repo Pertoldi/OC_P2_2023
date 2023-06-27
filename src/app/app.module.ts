@@ -5,10 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { NgChartsModule  } from 'ng2-charts';
-import { ChartComponent } from './components/chart/chart.component';
 import { TitleComponent } from './components/title/title.component';
 import { CountryComponent } from './core/pages/country/country.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -16,15 +15,14 @@ import { CountryComponent } from './core/pages/country/country.component';
     AppComponent,
     HomeComponent,
     NotFoundComponent, 
-    ChartComponent, 
     TitleComponent,
-    CountryComponent
+    CountryComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgChartsModule
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

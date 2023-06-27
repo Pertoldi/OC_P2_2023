@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
-import { ActiveElement, BubbleDataPoint, Chart, ChartConfiguration, ChartTypeRegistry, Point } from 'chart.js';
-import { ChartEvent } from 'chart.js/dist/core/core.plugins';
 import { IOlympicCountry } from 'src/app/core/models/Olympic.model';
 import { Router } from '@angular/router';
 
@@ -13,51 +11,48 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public olympics$: Observable<any> = of(null);
-
   public subTitles: {name: string, value:  number }[] = [];
-
-  public chartType = 'pie';
-  public chartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    onClick: (
-      event: ChartEvent,
-      elements: ActiveElement[],
-      chart: Chart<keyof ChartTypeRegistry, (number | [number, number] | Point | BubbleDataPoint | null)[], unknown>
-    ) => {
-      console.log('chart is :', chart.tooltip?.title);
-      this.router.navigate([`./country/${chart.tooltip?.title[0]}`]);
-      // TODO rediriger vers 404 dans le composant si la data n'est pas bonne 
-    },
-  };
-  public chartLabels: string[] = [ ];
-  public chartDatasets : {data: number []; backgroundColor: string[]}[] = [ {
-    data: [],
-    backgroundColor: []
-  } ];
-  public chartLegend = true;
-
-  private chartColor = ['#956065','#793d52','#89a1db','#b8cbe7', '#bfe0f1'];
   private unsubscribe$ = new Subject<void>();
   public asyncFlag = false;
 
-  constructor(private olympicService: OlympicService, private router: Router) {}
+  public view:[number, number] = [700, 500];
+  public data : {name:string, value: number}[] = [];
+  // options
+  public gradient = false;
+  public showLegend = false;
+  public showLabels = true;
+  public isDoughnut = false;
+
+  constructor(private olympicService: OlympicService, private router: Router) {
+    this.view = [innerWidth / 1.3, 500];
+  }
 
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
     this.olympics$.pipe(takeUntil(this.unsubscribe$))
-      .subscribe((value: IOlympicCountry[]) => {
-        console.log('value is :', value);
-        if (value) { 
-          value.forEach((element: IOlympicCountry, i: number) => {
-            this.chartLabels.push(element.country);
-            this.chartDatasets[0].data.push(element.participations.map(value => value.medalsCount).reduce( (acc, curr) => acc + curr));
-            this.chartDatasets[0].backgroundColor.push(this.chartColor[i % this.chartColor.length]);
-          });
-          this.subTitles = [{name: 'Number of JOs', value:  value.length },{ name: 'Number of countries', value: value.length} ];
+      .subscribe((data: IOlympicCountry[]) => {
+        if (data) {
+          data.forEach((elt: IOlympicCountry) => {
+            const numberOfMedals = elt.participations.map( value => value.medalsCount).reduce( (acc, curr) => acc + curr);
+            this.data.push({name: elt.country, value: numberOfMedals}); 
+          }
+          );
+          const numberOfJo =  Array.from(new Set(data.map(i => i.participations.map(f => f.year)).flat())).length;
+          this.subTitles = [{name: 'Number of JOs', value:  data.length },{ name: 'Number of countries', value: numberOfJo} ];
           this.asyncFlag = true;
         }
       });
+  }
+
+  onSelect(event:{name:string}): void {
+    this.router.navigate([`./country/${event.name}`]);
+  }
+
+  onResize(event: UIEvent) {
+    console.log('event is :', event);
+    const w = event.target as Window; 
+    this.view = [w.innerWidth / 1.30, 500];
   }
 
   ngOnDestroy(): void {
