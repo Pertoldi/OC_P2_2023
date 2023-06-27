@@ -35,7 +35,6 @@ export class DetailComponent implements OnInit, OnDestroy{
       .subscribe((data: IOlympicCountry[] | undefined) => {
         if (data) {
           const filteredData = data.filter(elt => elt.country === this.countryName);
-          console.log('filteredData is :', filteredData);
           const isCountry = filteredData.length > 0;
           if (!isCountry) return this.router.navigate(['/']);
           this.countryData = [{
