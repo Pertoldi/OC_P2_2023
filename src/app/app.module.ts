@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { TitleComponent } from './components/title/title.component';
-import { CountryComponent } from './core/pages/country/country.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
@@ -16,7 +15,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HomeComponent,
     NotFoundComponent, 
     TitleComponent,
-    CountryComponent,
   ],
   imports: [
     BrowserModule,
