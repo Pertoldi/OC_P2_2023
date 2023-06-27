@@ -15,7 +15,7 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "indent": [2, 2, { "SwitchCase": 1}],
+        "indent": ["error", 2],
         "semi": 2,
         "@angular-eslint/directive-selector": [
           "error",

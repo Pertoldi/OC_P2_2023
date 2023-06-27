@@ -3,6 +3,7 @@ import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { IOlympicCountry } from 'src/app/core/models/Olympic.model';
 import { Router } from '@angular/router';
+import { ISubTitle } from 'src/app/core/models/subTitle.model';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public olympics$: Observable<any> = of(null);
-  public subTitles: {name: string, value:  number }[] = [];
+  private olympics$: Observable<any> = of(null);
+  public subTitles: ISubTitle[] = [];
   private unsubscribe$ = new Subject<void>();
   public asyncFlag = false;
 
@@ -39,18 +40,17 @@ export class HomeComponent implements OnInit, OnDestroy {
           }
           );
           const numberOfJo =  Array.from(new Set(data.map(i => i.participations.map(f => f.year)).flat())).length;
-          this.subTitles = [{name: 'Number of JOs', value:  data.length },{ name: 'Number of countries', value: numberOfJo} ];
+          this.subTitles = [{name: 'Number of JOs', value: numberOfJo },{ name: 'Number of countries', value: data.length} ];
           this.asyncFlag = true;
         }
       });
   }
 
   onSelect(event:{name:string}): void {
-    this.router.navigate([`./country/${event.name}`]);
+    this.router.navigate([`./detail/${event.name}`]);
   }
 
   onResize(event: UIEvent) {
-    console.log('event is :', event);
     const w = event.target as Window; 
     this.view = [w.innerWidth / 1.30, 500];
   }
