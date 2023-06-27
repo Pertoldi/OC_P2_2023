@@ -1,7 +1,9 @@
+@import '../../core/utils/var.scss';
+
 h1 {
   font-size: 1.6em;
   margin: 20px;
-  background: #0b868f;
+  background: $primary-color;
   padding: 10px 15px;
   border-radius: 10px;
   color: white;
@@ -17,7 +19,7 @@ h1 {
   }
   &-element { 
     padding: 10px 15px;
-    border: solid #0b868f 2px;
+    border: solid $primary-color 2px;
     border-radius: 10px;
     color: gray;
     h2 { 
