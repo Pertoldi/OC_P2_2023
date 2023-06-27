@@ -1,0 +1,23 @@
+<app-title [title]="countryName" [subTitles]="[]"></app-title>
+
+<div class="center">
+
+  <ng-container *ngIf="asyncFlag">
+    <ngx-charts-line-chart
+    [view]="[700,500]"
+    [legend]="false"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Years'"
+    [yAxisLabel]="'Medals'"
+    [timeline]="true"
+    [results]="countryData"
+    >
+  </ngx-charts-line-chart>
+</ng-container>
+
+<button class="btn-back" (click)="goBack()">Go back</button>
+
+</div>
