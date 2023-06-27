@@ -13,6 +13,8 @@ h1 {
   width: 60vw;
   margin-bottom: 20px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
   justify-content: space-around;
   @media (max-width: 600px) {
     width: 100vw;

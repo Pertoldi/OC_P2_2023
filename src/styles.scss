@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import './app/core/utils/var.scss';
 
 /*CSS RESET*/
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -64,3 +64,55 @@ body {
 	font-family: Roboto, sans-serif;
 }
 
+/* CSS to modify tooltips of ngx-chart, must be in general' style otherwise it do not work */
+ngx-tooltip-content { 
+	&::after { 
+		content: "";
+		width: 0;
+		height: 0;
+		border-left: 9px solid transparent;
+		border-right: 9px solid transparent;
+		border-top: 9px solid $primary-color;
+		position: relative;
+		z-index: 99999;
+		bottom: -20px; 
+	}
+	&.ngx-charts-tooltip-content.type-tooltip {
+		background-color: $primary-color;
+		padding: 5px 5px 0;
+		border-radius: 5px;
+		.tooltip-caret.bottom {
+			fill: $primary-color;
+		}
+		.tooltip{
+			padding: 0 5px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			&-name { 
+				align-self: center;
+				margin-right: 10px;
+			}
+			&-value { 
+				padding: 0 3px;
+			}
+			& svg {
+				fill: white;
+				height: 20px;
+			}
+			.svg-container {
+				padding-top: 4px; 
+				height: 1em;
+				display: flex;
+				p { 
+					align-self: center;
+				}
+			}
+		}
+	}
+}
+
+text.pie-label {
+	font-size: 1em;
+}
