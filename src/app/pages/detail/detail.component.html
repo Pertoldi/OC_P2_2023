@@ -1,19 +1,20 @@
-<app-title [title]="countryName" [subTitles]="[]"></app-title>
+<app-title [title]="countryName" [subTitles]="subTitles"></app-title>
 
 <div class="center">
 
   <ng-container *ngIf="asyncFlag">
     <ngx-charts-line-chart
-    [view]="[700,500]"
+    [view]="view"
     [legend]="false"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
     [xAxis]="true"
     [yAxis]="true"
-    [xAxisLabel]="'Years'"
+    [xAxisLabel]="'Dates'"
     [yAxisLabel]="'Medals'"
     [timeline]="true"
     [results]="countryData"
+    (window:resize)="onResize($event)"
     >
   </ngx-charts-line-chart>
 </ng-container>

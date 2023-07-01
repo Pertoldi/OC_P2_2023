@@ -11,7 +11,7 @@ import { ISubTitle } from 'src/app/core/models/subTitle.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private olympics$: Observable<any> = of(null);
+  private olympics$: Observable<IOlympicCountry[] | undefined> = of(undefined);
   public subTitles: ISubTitle[] = [];
   private unsubscribe$ = new Subject<void>();
   public asyncFlag = false;
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
     this.olympics$.pipe(takeUntil(this.unsubscribe$))
-      .subscribe((data: IOlympicCountry[]) => {
+      .subscribe((data: IOlympicCountry[] | undefined) => {
         if (data) {
           data.forEach((elt: IOlympicCountry) => {
             const numberOfMedals = elt.participations.map( value => value.medalsCount).reduce( (acc, curr) => acc + curr);

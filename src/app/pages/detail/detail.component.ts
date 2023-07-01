@@ -16,6 +16,8 @@ export class DetailComponent implements OnInit, OnDestroy{
   private unsubscribe$ = new Subject<void>();
   public asyncFlag = false;
 
+  public view:[number, number] = [700, 500];
+
   public countryName = '';
   public subTitles: ISubTitle[] = [];
   public countryData: {name: string, series: {name: string, value: number}[]}[] = [];
@@ -23,7 +25,9 @@ export class DetailComponent implements OnInit, OnDestroy{
   constructor(
     private olympicService: OlympicService, 
     private activatedRoute: ActivatedRoute,
-    private router: Router) {}
+    private router: Router) {
+    this.view = [innerWidth / 1.3, 500];
+  }
 
   ngOnInit(): void {
 
@@ -36,17 +40,26 @@ export class DetailComponent implements OnInit, OnDestroy{
         if (data) {
           const filteredData = data.filter(elt => elt.country === this.countryName);
           const isCountry = filteredData.length > 0;
-          if (!isCountry) return this.router.navigate(['/']);
+          if (!isCountry) return this.router.navigate(['/notFound']);
           this.countryData = [{
             name: this.countryName, 
             series: filteredData[0].participations.map(elt => {
               return {name: elt.year.toString(), value: elt.medalsCount};
             })
           }];
+          this.subTitles = [
+            { name: 'Number of entires', value: filteredData[0].participations.length },
+            { name: 'Total number medals', value: filteredData[0].participations.map(elt => elt.medalsCount).reduce( (acc, curr) => acc + curr) },
+            { name: 'Total number of athletes', value: filteredData[0].participations.map(elt => elt.athleteCount).reduce( (acc, curr) => acc + curr)  } ];
           this.asyncFlag = true;
         } 
         return 0;
       });
+  }
+
+  onResize(event: UIEvent) {
+    const w = event.target as Window; 
+    this.view = [w.innerWidth / 1.30, 500];
   }
   
   goBack() { 

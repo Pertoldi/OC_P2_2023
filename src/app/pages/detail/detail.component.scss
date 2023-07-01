@@ -6,6 +6,8 @@
   padding :8px;
   border-style: none;
   border-radius: 5px;
+  cursor: pointer !important;
+  margin-bottom: 30px; 
   &:hover {
     background-color: darken($primary-color, 5%) ;
   }

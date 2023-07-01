@@ -10,12 +10,12 @@ import { IOlympicCountry } from '../models/Olympic.model';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<any>(undefined);
+  private olympics$ = new BehaviorSubject<IOlympicCountry[] | undefined>(undefined);
 
   constructor(private http: HttpClient) {}
 
   loadInitialData() {
-    return this.http.get<any>(this.olympicUrl).pipe(
+    return this.http.get<IOlympicCountry[] | undefined>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
       catchError((error, caught) => {
         if (error) {
@@ -23,7 +23,7 @@ export class OlympicService {
           // TODO use toastWarning
           // can be useful to end loading state and let the user know something went wrong
         }
-        this.olympics$.next(null);
+        this.olympics$.next(undefined);
         return caught;
       })
     );
