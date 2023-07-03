@@ -12,6 +12,7 @@
   [arcWidth]="0"
   (select)="onSelect($event)"
   (window:resize)="onResize($event)"
+  [maxLabelLength]="100"
   >
   <ng-template #tooltipTemplate let-model="model">
     <div class="tooltip">     

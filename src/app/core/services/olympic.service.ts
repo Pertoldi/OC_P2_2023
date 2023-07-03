@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ensureError } from 'src/app/core/utils/errorHandler';
 import { IOlympicCountry } from '../models/Olympic.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<IOlympicCountry[] | undefined>(undefined);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   loadInitialData() {
     return this.http.get<IOlympicCountry[] | undefined>(this.olympicUrl).pipe(
@@ -20,8 +21,7 @@ export class OlympicService {
       catchError((error, caught) => {
         if (error) {
           ensureError(error);
-          // TODO use toastWarning
-          // can be useful to end loading state and let the user know something went wrong
+          this.toastr.error('Cannot get olympics data. Something went wrong try reloading');
         }
         this.olympics$.next(undefined);
         return caught;
