@@ -8,7 +8,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { TitleComponent } from './components/title/title.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DetailComponent } from './pages/detail/detail.component';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { DetailComponent } from './pages/detail/detail.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxChartsModule
+    NgxChartsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
