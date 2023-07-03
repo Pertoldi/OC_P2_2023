@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ISubTitle } from 'src/app/core/models/subTitle.model';
 
 @Component({
   selector: 'app-title',
@@ -7,5 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class TitleComponent {
   @Input() title = 'default title !';
-  @Input() subTitles: {name: string, value:  number }[] = [];
+  @Input() subTitles: ISubTitle[] = [];
 }
